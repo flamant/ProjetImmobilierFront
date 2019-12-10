@@ -1,0 +1,123 @@
+<div class="row1 colorOpacity10">
+	<div class="vertical-center">
+		<span id="searchBuy" style="margin-left:20px" [ngClass]="prestation === 'A' ? 'selected': ''"  (click)="addClassSelected($event)">Achetter</span> 
+	</div>
+	<div class="vertical-center">
+		<span id="searchRent" style="margin-left:40px" [ngClass]="prestation === 'L' ? 'selected': ''"  (click)="addClassSelected($event)">Louer</span>
+	</div> 
+</div>
+<mat-dialog-content class="colorOpacity7" [formGroup]="dialogFormGroup">
+	<div class="column">
+		<div class="row">
+			<div class="column">
+			<input  type="text" placeholder="Dans quelle ville" formControlName="ville">
+			<mat-error *ngIf="dialogFormGroup.hasError('townOrPostalCodeMandatory') && (dialogFormGroup.controls['ville']?.touched || dialogFormGroup.controls['codePostal']?.touched)">La ville ou le code postal est requis !</mat-error>
+			<mat-error style="visibility: hidden" *ngIf="!(dialogFormGroup.hasError('townOrPostalCodeMandatory')  && (dialogFormGroup.controls['ville']?.touched || dialogFormGroup.controls['codePostal']?.touched))">La ville ou le code postal est requis !</mat-error>
+			</div>
+			<div class="column">
+			<input  style="margin-left:10px;" type="number" placeholder="Budget" formControlName="budget">
+			<mat-error style="margin-left:10px;" *ngIf="dialogFormGroup.hasError('budgetMandatory') && (dialogFormGroup.controls['budget']?.touched || dialogFormGroup.controls['budgetMin']?.touched || dialogFormGroup.controls['budgetMax']?.touched)">Un budget est requis !</mat-error>
+			<mat-error style="margin-left:10px;" style="visibility: hidden" *ngIf="!(dialogFormGroup.hasError('budgetMandatory')  && (dialogFormGroup.controls['budget']?.touched || dialogFormGroup.controls['budgetMin']?.touched || dialogFormGroup.controls['budgetMax']?.touched))">Le budget est requis !</mat-error>
+			</div>
+		</div>
+	</div>	
+	<br>
+	<div *ngIf="advancedResearch">
+		<div class="column">
+			<div class="row">
+				<input type="number" style="margin-bottom:5px;" placeholder="Code postal" formControlName="codePostal">
+				<input type="number" style="margin-bottom:5px;margin-left:10px;" placeholder="Budget min" formControlName="budgetMin">
+			</div>
+			<div class="row">
+				<!-- <input type="number" style="visibility:hidden"> -->
+				<select style="margin-left:-32px;" formControlName="type">
+					<option value="" selected>Choisir le type d'habitation</option>
+					<option value="Maison">Maison</option>
+					<option value="Appartement">Appartement</option>
+					<option value="Autre">Autre</option>
+				</select>			
+				<input type="number" style="margin-left:10px;" placeholder="Budget max" formControlName="budgetMax">
+			</div>
+		</div>
+		<br>
+		<div class="column">
+			<div class="row">
+				<input type="number" style="margin-bottom:5px;" placeholder="Surface min" formControlName="surfaceMin">
+				<input type="number" style="margin-bottom:5px;margin-left:10px;" placeholder="Nombre min de pièces" formControlName="nbrPieceMin">
+				
+			</div>
+			<div class="row">
+				<input type="number"  placeholder="Surface max" formControlName="surfaceMax">
+				<input type="number" style="margin-left:10px;" placeholder="Nombre max de pièces" formControlName="nbrPieceMax">
+			</div>
+		</div>
+		<br>
+		<div class="column">
+			<div class="row">
+				<input type="number" style="margin-bottom:5px;margin-left:-16px;"  placeholder="Nombre min de chambres" formControlName="nbrChambreMin">
+				<select style="margin-left:16px;" formControlName="zone">
+					<option value="" selected>Choisir une zone</option>
+					<option value="A">A</option>
+					<option value="Abis">Abis</option>
+					<option value="B1">B1</option>
+					<option value="B2">B2</option>
+					<option value="C">C</option>
+				</select>
+			</div>
+			<div class="row">
+				<input type="number" placeholder="Nombre max de chambres" formControlName="nbrChambreMax">
+				<input type="number" style="visibility:hidden;margin-left:10px;">
+			</div>
+		</div>
+		<br>
+		<div class="column">
+			<div class="row">
+				<mat-form-field class="date">
+					<input matInput  [matDatepicker]="datepicker1" placeholder="Date de mise en ligne min" formControlName="dateMiseEnLigneMin">
+					<mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+					<mat-datepicker #datepicker1></mat-datepicker>
+				</mat-form-field>
+				&nbsp;&nbsp;&nbsp;
+				<mat-form-field class="date">
+					<input matInput  [matDatepicker]="datepicker3" placeholder="Date de construction min" formControlName="dateConstructionMin">
+					<mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
+					<mat-datepicker #datepicker3></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="row">
+				<mat-form-field class="date">
+					<input matInput [matDatepicker]="datepicker2" placeholder="Date de mise en ligne max" formControlName="dateMiseEnLigneMax">
+					<mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+					<mat-datepicker #datepicker2></mat-datepicker>
+				</mat-form-field>
+				&nbsp;&nbsp;&nbsp;
+				<mat-form-field class="date">
+					<input matInput [matDatepicker]="datepicker4" placeholder="Date de construction max" formControlName="dateConstructionMax">
+					<mat-datepicker-toggle matSuffix [for]="datepicker4"></mat-datepicker-toggle>
+					<mat-datepicker #datepicker4></mat-datepicker>
+				</mat-form-field>
+			</div>
+		</div>
+		<br>
+		<div class="column">
+			<div class="row">
+				<mat-checkbox formControlName="parking">Parking</mat-checkbox>
+				<mat-checkbox style="margin-left:10px;" formControlName="ascenceur">Ascenseur</mat-checkbox>
+				<mat-checkbox style="margin-left:10px;" formControlName="gardien">Gardien</mat-checkbox>
+				<mat-checkbox style="margin-left:10px;" formControlName="cheminee">Cheminée</mat-checkbox>
+			</div>
+		</div>
+		<br>
+	</div>		
+</mat-dialog-content>
+<div class="row2 colorOpacity7">
+<mat-radio-group [style.visibility]="prestation === 'A' ? 'visible' : 'hidden'" style="width: 50% !important;" class="row colorOpacity7" name="aim" [(ngModel)]="aim">
+	<mat-radio-button class="matRadio" labelPosition="after" checked="true" value="L">To live in</mat-radio-button>
+	<mat-radio-button labelPosition="after" value="I">To invest</mat-radio-button>
+</mat-radio-group>
+<a href="javascript:void(0)" style="float: right;" (click)="advancedResearch=!advancedResearch">Recherche avancée</a>
+</div>
+<mat-dialog-actions class="row">
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button custom-button" [disabled]="!dialogFormGroup.valid" (click)="save();">Search</button>
+</mat-dialog-actions>

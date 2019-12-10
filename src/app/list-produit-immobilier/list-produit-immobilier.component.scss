@@ -1,0 +1,29 @@
+mat-card.mat-card {
+	margin: 10px 20px 20px 20px;
+	
+}
+
+.justify-content-center {
+    display: flex !important;
+		justify-content: center !important;
+		margin-top: 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.mapBox {
+	border: 1px solid blue; 
+}
+
+ a.disabled {
+	pointer-events: none;
+	cursor: default;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,1), 
+                0 1px 1px 0 rgba(0,0,0,1), 
+                0 1px 3px 0 rgba(0,0,0,1);
+}

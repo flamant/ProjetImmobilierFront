@@ -1,0 +1,76 @@
+<mat-toolbar class="menu-bar mat-elevation-z1">
+  <div class="colorOpacity3">BETTER</div>
+  <div style="width:100%;" class="md-toolbar-tools" >
+     <button class="colorOpacity4 button1" (click)="openDialog('A');" type="button">Buy</button> 
+     <button class="colorOpacity4 button1" (click)="openDialog('L');" type="button">Rent</button>
+     <button class="colorOpacity4 button1" type="button">About us</button> 
+  </div>
+  <div style="float: right">
+    <img src="./../assets/image/favorite-24px.svg" style="opacity: 0.5" width="20px" height="18.35px" alt="heart"/>
+    <button class="colorOpacity5 button2" (click)="openUserDialog();" type="button">SIGN IN</button>
+  </div>
+</mat-toolbar>
+<div fxLayout="row">
+  <div fxFlex="5%"></div>
+  <div fxFlex="50%">
+    <div class="col-12 justify-content-center">
+      <ngb-pagination  [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="5" [collectionSize]="collectionSize" [boundaryLinks]="true" (pageChange)="loadPage($event)">
+        <ng-template ngbPaginationFirst>&laquo;</ng-template>
+        <ng-template ngbPaginationLast>&raquo;</ng-template>
+        <ng-template ngbPaginationPrevious>&lsaquo;</ng-template>
+        <ng-template ngbPaginationNext>&rsaquo;</ng-template>
+        <ng-template ngbPaginationEllipsis>...</ng-template>
+        <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+      </ngb-pagination>
+    </div>
+    <mat-card id="matCard{{i}}" *ngFor="let annonce of annonces  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index"   class="pointer" (click)="goToDetailsView(annonce)">
+      <div id="mapBox{{i}}" class="mapBox" [style.visibility]="mapVisibility(i)" style="position: absolute;top: 0px;left: 110%;width:80%;">
+        <div #map id="map{{i}}"  style="width:100%;height:100%;"></div>
+      </div>
+        <mat-card-content id="">
+          <div class="container" fxLayout="row" >
+            <div fxFlex="40%">
+              <img src="./../assets/image/image{{i+1}}.jpg" alt="Avatar" style="top:0px;left:0px;width: 100%;">
+            </div>
+            <div style="padding-left: 10px" fxFlex="60%">
+                <div>
+                  <span class="colorOpacity1">{{annonce?.type}} &#8226; New</span>
+                  <span style="float:right">
+                    <span><img src="./../assets/image/favorite-24px.svg" style="opacity: 0.5;" width="17px" height="15px" alt="heart"/></span>
+                    <span><a href="javascript:void(0);" style="padding-left: 10px" class="colorOpacity6" (click)="codeAddress($event, annonce,i)">Map</a></span>
+                  </span>
+                </div>
+                <div class="colorOpacity6" >{{annonce?.nbrPiece}} rooms &#47; {{annonce?.nbrChambre}} bedrooms &#47; {{annonce?.surface}} m<sup>2</sup></div>
+                <div class="colorOpacity1">{{annonce?.adresse}} &#47; {{annonce?.ville}} &#47; {{annonce?.codePostal}}</div>
+                <!-- <div>Construit le : {{commonService.convertToDate(annonce?.dateConstruction) | date:'dd MMMM yyyy':'+0100':'fr'}}</div> -->
+                <br>  
+                <div class="colorOpacity7">
+                  <p>{{generateSpaceString(annonce)}}</p>
+                </div>
+                <br>
+                <div>
+                  <span class="colorOpacity6"><b>{{annonce?.prix | currency:'EUR':'symbol':'1.0-0':'fr'}}</b></span>
+                </div> 
+                <div>
+                  <span class="colorOpacity2">or {{((annonce?.prix)/12.) | currency:'EUR':'symbol':'1.0-0':'fr'}} &#47;month<sup>**</sup></span>
+                </div>                               
+                <br>
+            </div>
+          </div>
+        </mat-card-content>
+    </mat-card>
+    <div class="col-12 justify-content-center">
+      <ngb-pagination  [(page)]="page" [maxSize]="5" [rotate]="true" [pageSize]="5" [collectionSize]="collectionSize" [boundaryLinks]="true" (pageChange)="loadPage($event)">
+        <ng-template ngbPaginationFirst>&laquo;</ng-template>
+        <ng-template ngbPaginationLast>&raquo;</ng-template>
+        <ng-template ngbPaginationPrevious>&lsaquo;</ng-template>
+        <ng-template ngbPaginationNext>&rsaquo;</ng-template>
+        <ng-template ngbPaginationEllipsis>...</ng-template>
+        <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+      </ngb-pagination>
+    </div>    
+  </div>
+  <div fxFlex="30%"></div>
+  <div fxFlex="5%"></div>
+</div>
+

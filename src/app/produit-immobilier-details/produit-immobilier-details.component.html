@@ -1,0 +1,221 @@
+<mat-toolbar class="menu-bar mat-elevation-z1">
+  <div class="colorOpacity3">BETTER</div>
+  <div style="width:100%;" class="md-toolbar-tools" >
+     <button class="colorOpacity4 button1" (click)="openDialog('A');" type="button">Buy</button> 
+     <button class="colorOpacity4 button1" (click)="openDialog('L');" type="button">Rent</button>
+     <button class="colorOpacity4 button1" type="button">About us</button> 
+  </div>
+  <div style="float: right">
+    <img src="./../assets/image/favorite-24px.svg" style="opacity: 0.5" width="20px" height="18.35px" alt="heart"/>
+    <button class="colorOpacity5 button2" (click)="openUserDialog();" type="button">SIGN IN</button>
+  </div>
+</mat-toolbar>
+<div fxLayout="row">
+  <div fxFlex="15%"></div>
+  <div fxFlex="70%">
+    <mat-card>
+        <mat-card-content>
+					<div fxLayout="row">
+					<div fxFlex="20%"></div>
+					<div fxFlex="60%" >
+						<ngb-carousel>
+								<ng-template *ngFor="let im of images; let i = index;" ngbSlide>
+									<div *ngIf="i<numberOfImages">
+										<div class="picsum-img-wrapper" fxLayoutAlign="center center">
+												<img src="./../assets/image/image1_{{i+1}}.jpg" alt="Random {{im.orderLo}} slide"  style="height:330px">
+										</div>
+										<div class="carousel-caption">
+												<h3>{{im.orderUp}} slide label</h3>
+												<p>{{im.comment}}</p>
+										</div>
+									</div>
+								</ng-template>	
+						</ngb-carousel>							
+					</div>
+					<div style="text-align:center" fxFlex="20%">
+						<div><b>Téléphone</b></div>
+						<div>{{annonce?.telephone}}</div>
+					</div>
+					</div>
+					<hr color="blue" width="100%">
+          <div class="container">
+						<div>
+							<span class="colorOpacity8">{{annonce?.type}} &#8226; New</span>
+						</div>
+						<div>
+							<img src="./../assets/image/-24px.svg" style="opacity: 0.5" width="19.17px" height="17.59px" alt="heart"/>
+							<span class="colorOpacity9" >{{annonce?.nbrPiece}} rooms &#47; {{annonce?.nbrChambre}} bedrooms &#47; {{annonce?.surface}} m<sup>2</sup></span>
+							<span class="colorOpacity9" style="float:right">{{annonce?.prix | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+						</div>
+						<div>
+							<span class="colorOpacity8">{{annonce?.adresse}} &#47; {{annonce?.ville}} &#47; {{annonce?.codePostal}}</span>
+							<span style="float:right" class="colorOpacity2">or {{((annonce?.prix)/12.) | currency:'EUR':'symbol':'1.0-0':'fr'}} &#47;month<sup>**</sup></span>
+						</div>
+						<hr color="blue" width="100%">
+						<nav style="position:relative;" class="navigation">
+								<ul class="menu">
+										<li><a id="menuHorizon1" class="expanded" (click)="applyClickCss($event)" href="javascript:void(0)">Description</a></li>
+										<li><a id="menuHorizon2" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
+										<li><a id="menuHorizon3" (click)="applyClickCss($event)" href="javascript:void(0)">Perspective for future</a></li>
+										<li><a id="menuHorizon4" (click)="applyClickCss($event)" href="javascript:void(0)">Neighborhood</a></li>
+										<li><a id="menuHorizon5" (click)="applyClickCss($event)" href="javascript:void(0)">Agency</a></li>
+
+								</ul>
+						</nav>
+						<nav style="position:relative;" class="responsive-navigation">
+								<div class="toggle-menu" title="Menu"><img alt="Menu" title="Menu" src="./../assets/image/menu-28px-25px.png"  style="vertical-align:middle; padding-right:3px"/>MENU</div>
+								<ul class="menu">
+										<li><a id="menuVertical1" (click)="applyClickCss($event)" href="javascript:void(0)">Description</a></li>
+										<li><a id="menuVertical2" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
+										<li><a id="menuVertical3" (click)="applyClickCss($event)" href="javascript:void(0)">Perspective for future</a></li>
+										<li><a id="menuVertical4" (click)="applyClickCss($event)" href="javascript:void(0)">Neighborhood</a></li>
+										<li><a id="menuVertical5" (click)="applyClickCss($event)" href="javascript:void(0)">Agency</a></li>
+								</ul>
+						</nav>																
+						<br>
+						<div *ngIf="tabNumber===1">
+							<div fxLayout="row">
+								<div fxFlex="60%">
+									<div class="colorOpacity7">
+										<p>{{annonce?.description}}</p>
+									</div>
+									<br>
+									<a href="javascript:void(0)" (click)="moreInfo=!moreInfo">More Info</a>
+									<div *ngIf="moreInfo">
+										<div class="colorOpacity9">Composition</div>
+										<br>
+										<div fxLayout="row">
+											<span fxFlex="20%" class="colorOpacity7">Etage : 2</span>
+											<span fxFlex="80%" class="colorOpacity7">Nombre de pièces : {{annonce?.nbrPiece}}</span>
+										</div>
+										<div fxLayout="row">
+											<span fxFlex="20%"></span>
+											<span fxFlex="80%" class="colorOpacity7">Nombre de chambres : {{annonce?.nbrChambre}}</span>
+										</div>
+										<br>	
+										<div fxLayout="row">
+											<span fxFlex="50%" class="colorOpacity7">Nombre de salle de bain : 1</span>
+											<span fxFlex="50%" class="colorOpacity7">Nombre de salle de douche : 1</span>
+										</div>
+										<div fxLayout="row">
+											<span fxFlex="50%" class="colorOpacity7">Nombre de toilette séparées : 1</span>
+											<span fxFlex="50%" class="colorOpacity7">Nombre de toilette non séparées : 1</span>
+										</div>
+										<br>
+										<br>
+										<div class="colorOpacity9">Divers</div>
+										<br>
+										<div fxLayout="row">
+											<span fxFlex="30%" class="colorOpacity7">Parking : {{annonce?.isParking ? 'oui': 'non'}}</span>
+											<span fxFlex="30%" class="colorOpacity7">Ascenseur : {{annonce?.isLift ? 'oui': 'non'}}</span>
+											<span fxFlex="30%"></span>
+											<!-- <div fxFlex="33%">Gardien : {{annonce.produitImmobilierDTO?.isGardien ? 'oui': 'non'}}</div> -->
+										</div>
+										<div fxLayout="row">
+											<span fxFlex="30%" class="colorOpacity7">Cheminée : oui</span>
+											<span fxFlex="30%" class="colorOpacity7">Interphone : oui</span>
+											<span fxFlex="30%" class="colorOpacity7">Digicode : oui</span>
+										</div>	
+										<br>					
+										<div fxLayout="row">
+											<div fxFlex="30%" class="colorOpacity7">Nombre de lots : {{annonce?.nbrLots}}</div>
+											<div fxFlex="15%" class="colorOpacity7">Dpe : {{annonce?.dpe}}</div>
+											<div fxFlex="30%" class="colorOpacity7">Orientation : Sud</div>
+											<div fxFlex="25%" class="colorOpacity7">Zone : A</div>
+										</div>
+										<br>
+										<br>			  
+										<div class="colorOpacity9">Surfaces</div>
+										<br>
+										<div fxLayout="row">
+											<span fxFlex="40%" class="colorOpacity7">Surface balcon : {{annonce?.surfaceBalcon}} m<sup>2</sup></span>
+											<span fxFlex="60%" class="colorOpacity7">Surface terasse : {{annonce?.surfaceTerrasse}} m<sup>2</sup></span>
+										</div>             
+										<div fxLayout="row">
+											<span fxFlex="40%" class="colorOpacity7">Surface veranda : {{annonce?.surfaceVerandas}} m<sup>2</sup></span>
+											<span fxFlex="60%" class="colorOpacity7">Surface sous sol : {{annonce?.surfaceSousSol}} m<sup>2</sup></span>
+										</div>
+										<div fxLayout="row">	
+											<span fxFlex="40%" class="colorOpacity7">Surface cave : {{annonce?.surfaceCave}} m<sup>2</sup></span>
+											<span fxFlex="60%" class="colorOpacity7">Surface logias : {{annonce?.surfaceLogias}} m<sup>2</sup></span>
+										</div>
+										<div fxLayout="row">
+											<span fxFlex="40%" class="colorOpacity7">Surface annexes : {{annonce?.autreSurfaceAnnexe}} m<sup>2</sup></span>
+											<span fxFlex="60%" ></span>
+										</div>
+										<br>
+										<div class="colorOpacity9">Information financières</div>
+										<br>
+										<div fxLayout="row">
+											<span fxFlex="50%" class="colorOpacity7">Loyer maximum : {{annonce?.loyerMaximum | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+											<span fxFlex="50%" class="colorOpacity7">Charges copropriété : {{annonce?.chargesCoprop | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+										</div>
+										<div fxLayout="row">
+											<span fxFlex="50%" class="colorOpacity7">Taxes foncières : {{annonce?.taxeFonciaire | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+											<span fxFlex="50%"></span>
+										</div>									
+									</div>						
+									<br>
+								</div>
+								<div fxFlex="40%">
+									<div id="mapBox" class="mapBox"  style="width:100%">
+										<div #map id="map" style="width:100%;height:100%;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr color="blue" width="100%">
+						<div *ngIf="tabNumber===2">
+							<br>
+							<div class="colorOpacity7">
+								<p>{{annonce?.description}}</p>
+							</div>	
+							
+							<br>						
+							<div *ngFor="let item of realEstateFile; let i = index" style="cursor:pointer;" class="flex-rectangle" (click)="realEstateFileFlag[i]=!realEstateFileFlag[i]">
+								<div>
+									<span>{{i+1}}.</span><span class="tabulation">{{item.type}} </span> <span *ngIf="item.years!=0">{{item.years}} years</span>
+									<span style="float: right">{{item?.price | currency:'EUR':'symbol':'1.0-0':'fr'}}&#47;month</span>
+								</div>
+								<div class="tabulation1" *ngIf="realEstateFileFlag[i]">
+									<br>
+									<p style="display: inline;">{{item.text}}</p><span class="colorOpacity2">learn more</span>
+									<br>
+									<br>
+									<div>
+										<span>Monthly tax reduction</span>
+										<span style="float: right">{{item?.monthlyTaxReduction | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+									</div>
+									<br>
+									<div>
+										<span>Réduction d'imports</span>
+										<span style="float: right">{{item?.reductionImports | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+									</div>
+									<br>	
+									<div>
+										<span>Maximum monthly rent price</span>
+										<span style="float: right">{{item?.reductionImports | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+									</div>
+									<br>
+									<div>
+										<span>Estimated monthly credit rate</span>
+										<span style="float: right">{{item?.estimatedMonthlyCreditRate | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+									</div>
+									<br>
+									<div>
+										<span>Additional monthly costs</span>
+										<span style="float: right">{{item?.additionalMonthlyCosts | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+									</div>																																			
+								</div>
+							</div>
+						</div>
+						<br>
+						<nav fxLayout fxLayoutAlign="center center">
+							<a routerLink="/listproduitimmobilier" routerLinkActive="active">Retour à la liste des Produits Immobiliers</a>
+						</nav>								  
+          </div>
+        </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="15%"></div>
+</div>

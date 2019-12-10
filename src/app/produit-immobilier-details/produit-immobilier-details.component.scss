@@ -1,0 +1,233 @@
+mat-card :host .mat-card{
+  border: 2px solid #000 !important;
+  border-radius: 2px !important;
+	border: #000 !important;
+	margin: 20px;
+}
+
+.mat-toolbar-single-row {
+	text-align: center;
+}   
+
+mat-card {
+	margin-top: 10px;
+	border: 1px solid blue; 
+	box-shadow: -1px 1px blue, -2px 2px blue, -3px 3px blue, -4px 4px blue, -5px 5px blue;
+}
+
+table, th, td {
+	padding: 10px; 
+	border-collapse: collapse;
+}
+
+th {
+	background-color:rgb(233, 238, 241);
+}
+
+td {
+	background-color:rgb(228, 248, 225);
+	cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid black;
+}
+
+table tr:last-child td {
+	border-bottom: 0;
+	border-right: 0;
+	border-left: 0;
+}
+
+ /* unvisited link */
+a:link {
+  color: blue !important;
+}
+
+/* visited link */
+a:visited {
+  color: blue;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+} 
+
+hr {
+	border: 1 !important;
+	border-top: 1px solid rgb(0,0,255);
+}
+
+.mapBox {
+	border: 1px solid blue; 
+}
+
+/**************  Menu **************/
+
+$navigationClass: '.navigation';
+$responsiveNavigationClass: '.responsive-navigation';
+$main-menu-font-family: 'Poppins, Montserrat,sans-serif';
+$baseColor: blue;
+$default-font-color: #181a1f;
+
+.toggle-menu {
+    font-style: normal;
+    font-weight: 700;
+    font-family: $main-menu-font-family;
+    color: blue;
+    cursor:pointer;
+}
+
+#{$navigationClass} {
+    padding: 0px 0 26px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    
+}
+
+#{$responsiveNavigationClass} ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+#{$responsiveNavigationClass} .menu li {
+    display: block;
+    padding-top: 1em;
+}
+
+
+#{$navigationClass} .menu li +li::before {
+  content: "-";
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 1em;
+  text-align: center;
+}
+#{$navigationClass} .menu li {
+  display: table-cell;      /* moins « sale » que float: left */
+  position: relative;       /* pour servir de référent */
+}
+#{$navigationClass} .menu li +li {
+  padding-left: 1em;        /* espace pour placer le ::before */
+}
+#{$navigationClass} .menu a {
+  display: block;
+}
+.menu a {
+  position: relative;       /* pour servir de référent */
+  padding: 0 .5em;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4;
+  font-family: $main-menu-font-family;
+  letter-spacing: 1px;
+  color: black;
+}
+.menu a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -.5em;            /* décalage vers le bas à ajuster */
+  right: 50%;
+  left: 50%;
+  height: 2px;
+  background: $baseColor;
+  transition: all .5s;      /* pour un petit effet */
+}
+
+a.expanded::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -.5em;            /* décalage vers le bas à ajuster */
+  right: 50%;
+  left: 50%;
+  height: 2px;
+  background: $baseColor;
+}
+
+li a:hover {
+  color: $baseColor;
+}
+
+.menu a.active {
+    color: $baseColor;
+}
+
+.menu a.active::before,
+.menu a:hover::before {
+  right: .5em;              /* tient compte du padding-right */
+  left: .5em;               /* tient compte du padding-left */
+}
+
+.menu a.expanded::before {
+  right: .5em;
+  left: .5em;  
+}
+
+.responsive-navigation {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-family: Poppins, Montserrat, sans-serif;
+  letter-spacing: 1px;
+  color: $baseColor; }
+
+  .responsive-navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+.responsive-navigation .menu li {
+  display: block; }
+
+.responsive-navigation .menu li {
+  padding-top: 1em; }
+
+
+nav {
+    text-align: center;
+}
+
+@media only screen and (max-width: 1035px) {
+  .navigation {
+    display: none; } }
+@media only screen and (min-width: 1035px) {
+  .responsive-navigation {
+    display: none; } }
+
+/******** fin Menu ******/
+
+/********* Début Dossiers immobilier **********/
+
+.flex-rectangle{
+    width: 100%;
+    border: 1px solid black;
+    padding: 10px;
+    display: block;
+    margin: 20px 0 20px;
+}
+
+.tabulation { margin: 0 0 0 20px; }
+.tabulation1 { margin: 0 0 0 30px; }
+
+/********* Fin Dossiers immobilier **********/

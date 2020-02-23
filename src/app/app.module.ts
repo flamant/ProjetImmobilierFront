@@ -14,6 +14,16 @@ import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CreateProduitImmobilierDialogComponent } from './create-produit-immobilier-dialog/create-produit-immobilier-dialog.component';
+import { PinelComponent } from './produit-immobilier-details/pinel/pinel.component';
+import { Pinel9Component } from './produit-immobilier-details/pinel9/pinel9.component';
+import { Pinel12Component } from './produit-immobilier-details/pinel12/pinel12.component';
+import { BouvardComponent } from './produit-immobilier-details/bouvard/bouvard.component';
+import { LmnpMicroComponent } from './produit-immobilier-details/lmnp-micro/lmnp-micro.component';
+import { LmnpReelComponent } from './produit-immobilier-details/lmnp-reel/lmnp-reel.component';
+import { DragDropDirective } from './drag-drop.directive';
+import { AutofocusDirective } from './autofocus.directive';
 
 registerLocaleData(localeFr, 'fr');
 declare var $: any;
@@ -26,7 +36,18 @@ console.log(`jQuery version: ${$.fn.jquery}`);
     ListProduitImmobilierComponent,
     ProduitImmobilierDetailsComponent,
     SearchComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    HeaderComponent,
+    CreateProduitImmobilierDialogComponent,
+    PinelComponent,
+    Pinel9Component,
+    Pinel12Component,
+    BouvardComponent,
+    LmnpMicroComponent,
+    LmnpReelComponent,
+    DragDropDirective,
+    AutofocusDirective
+
   ],
   imports: [
     NgbModule,
@@ -40,7 +61,8 @@ console.log(`jQuery version: ${$.fn.jquery}`);
     ReactiveFormsModule
   ],
   providers: [],
-  entryComponents: [SearchComponent, UserDialogComponent],
+  // tslint:disable-next-line: max-line-length
+  entryComponents: [SearchComponent, UserDialogComponent, CreateProduitImmobilierDialogComponent, PinelComponent, Pinel9Component, Pinel12Component, BouvardComponent, LmnpMicroComponent, LmnpReelComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

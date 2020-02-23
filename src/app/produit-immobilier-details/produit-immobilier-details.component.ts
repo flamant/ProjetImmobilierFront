@@ -1,12 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProduitImmobilierDTO } from '../produit-immobilier-dto';
 import { CommonService } from '../common.service';
 import {} from 'googlemaps';
-import { MatDialogConfig, MatDialog } from '@angular/material';
-import { SearchComponent } from '../search/search.component';
+import { MatDialog } from '@angular/material';
 import { Search } from '../search';
-import { UserDialogComponent } from '../user-dialog/user-dialog.component';
+import {DossierSimulationDTO} from '../dossier-simulation-dto';
+import {RequestService} from '../request.service';
+import {PinelComponent} from './pinel/pinel.component';
+import {ResultatLoiPinelDTO} from '../resultat-loi-pinel-dto';
+import {LmnpReelComponent} from './lmnp-reel/lmnp-reel.component';
+import {Pinel9Component} from './pinel9/pinel9.component';
+import {Pinel12Component} from './pinel12/pinel12.component';
 
 declare var $: any;
 
@@ -24,59 +29,16 @@ export class ProduitImmobilierDetailsComponent implements OnInit, AfterViewInit 
   public map: google.maps.Map = null;
   public marker: google.maps.Marker;
   public search: Search;
-  public tabNumber = 1;
-  public realEstateFileNumber = 4;
-  public realEstateFileFlag: boolean[] = [];
-  public realEstateFile = [
-    {
-      type: 'Pinel',
-      years: 12,
-      price: 1138,
-      // tslint:disable-next-line: max-line-length
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper ',
-      monthlyTaxReduction: 145.95,
-      reductionImports: 0,
-      maximumMonthlyRentPrice: 745.95,
-      estimatedMonthlyCreditRate: 1066.53,
-      additionalMonthlyCosts: 186
-    },
-    {
-      type: 'Historical Monuments',
-      years: 0,
-      price: 1208,
-      // tslint:disable-next-line: max-line-length
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper ',
-      monthlyTaxReduction: 110.50,
-      reductionImports: 10,
-      maximumMonthlyRentPrice: 800,
-      estimatedMonthlyCreditRate: 1200.80,
-      additionalMonthlyCosts: 250
-    },
-        {
-      type: 'Pinel',
-      years: 9,
-      price: 2566,
-      // tslint:disable-next-line: max-line-length
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper ',
-      monthlyTaxReduction: 280.70,
-      reductionImports: 0,
-      maximumMonthlyRentPrice: 1200.40,
-      estimatedMonthlyCreditRate: 2160.50,
-      additionalMonthlyCosts: 400
-    },
-    {
-      type: 'Dismemberment',
-      years: 0,
-      price: 2589,
-      // tslint:disable-next-line: max-line-length
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper ',
-      monthlyTaxReduction: 310.30,
-      reductionImports: 20,
-      maximumMonthlyRentPrice: 870.60,
-      estimatedMonthlyCreditRate: 2240.80,
-      additionalMonthlyCosts: 430
-    }
-  ];
+  public tabNumber = 2;
+  public dossier: DossierSimulationDTO = new DossierSimulationDTO(null, null, null, null, null, null, null);
+  public pinel: PinelComponent;
+  public lmnp: LmnpReelComponent;
+  componentRef1: any;
+  componentRef2: any;
+  componentRef3: any;
+  componentRef4: any;
+  componentRef5: any;
+  mapSimulation: any;
 
   public slides = [
     {
@@ -160,29 +122,46 @@ export class ProduitImmobilierDetailsComponent implements OnInit, AfterViewInit 
     }
   ];
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private commonService: CommonService, private dialog: MatDialog) {
+
+
+  @ViewChild('option1', {static: false, read: ViewContainerRef }) entry1: ViewContainerRef;
+  @ViewChild('option2', {static: false, read: ViewContainerRef }) entry2: ViewContainerRef;
+  @ViewChild('option3', {static: false, read: ViewContainerRef }) entry3: ViewContainerRef;
+  // tslint:disable-next-line: max-line-length  
+  constructor(private changeDetector: ChangeDetectorRef, private resolver: ComponentFactoryResolver, private activatedRoute: ActivatedRoute, private commonService: CommonService, private requestService: RequestService) {
     this.geocoder = new google.maps.Geocoder();
   }
 
   ngOnInit() {
     // tslint:disable-next-line: max-line-length
-    this.annonce = new ProduitImmobilierDTO(1, 'Appartement', '0102030405', 'C’est idéalement situé au 27 quai de Grenelle que Flatlooker vous propose aujourd’hui ce trois pièces d’exception au 5ème étage', 1, 0, 1, 'A', 4, 2, 100, '101', 1215122400000, '27 quai de Grenelle', '75015', 'Paris', 102, 103, 104, 105, 106, 107, 108, 109, 110, 1000, 30, 20, 10, 1);
-    this.activatedRoute.queryParams.subscribe(params => {
-        console.log(params);
+   //this.annonce = new ProduitImmobilierDTO(1, 'Appartement', '0102030405', 'C’est idéalement situé au 27 quai de Grenelle que Flatlooker vous propose aujourd’hui ce trois pièces d’exception au 5ème étage', 1, 0, 1, 0, 1, 'A', 4, 2, 100, '101', 1215122400000, 1577029066, '27 quai de Grenelle', '75015', 'Paris', 102, 103, 104, 105, 106, 107, 108, 109, 110, 1000, 30, 20, 10, 1);
+     this.mapSimulation = new Map();
+     this.id = this.activatedRoute.snapshot.params.id;
+     this.requestService.getDossierSimulation(this.id).subscribe((data: DossierSimulationDTO) => {
+      this.dossier.produitImmobilierDTO = data.produitImmobilierDTO;
+      this.dossier.resultatLoiPinel6DTO = data.resultatLoiPinel6DTO;
+      this.dossier.resultatLoiPinel9DTO = data.resultatLoiPinel9DTO;
+      this.dossier.resultatLoiPinel12DTO = data.resultatLoiPinel12DTO;
+      this.dossier.resultatBouvardDTO = data.resultatBouvardDTO;
+      this.dossier.resultatLmnpMicroDto = data.resultatLmnpMicroDto;
+      this.dossier.resultatLmnpReelDto = data.resultatLmnpReelDto;
+      this.mapSimulation.set('PINEL6', this.dossier.resultatLoiPinel6DTO);
+      this.mapSimulation.set('PINEL9', this.dossier.resultatLoiPinel9DTO);
+      this.mapSimulation.set('PINEL12', this.dossier.resultatLoiPinel12DTO);
+      this.mapSimulation = new Map([...this.mapSimulation.entries()].sort((a, b) => (a[1].effortEpargne > b[1].effortEpargne) ? -1 : 1));
+      this.createComponent();
+      this.annonce = this.dossier.produitImmobilierDTO;
     });
-    for (let i = 0; i < this.numberOfImages; i++) {
+
+     for (let i = 0; i < this.numberOfImages; i++) {
         this.images[i] = this.imagesText[i];
-    }
-    for (let i = 0; i < this.realEstateFileNumber; i++) {
-      this.realEstateFileFlag.push(false);
-    }
-    this.commonService.currentMessage.subscribe(message => this.search = message);
+     }
+     this.commonService.currentMessage.subscribe(message => this.search = message);
   }
 
   displayOrientation(annonce: { produitImmobilierDTO: { orientation: string; }; }) {
     let result = '';
-    if (annonce.produitImmobilierDTO.orientation === 'N') {
+   /* if (annonce.produitImmobilierDTO.orientation === 'N') {
         result = 'Nord';
     }
     if (annonce.produitImmobilierDTO.orientation === 'O') {
@@ -205,17 +184,74 @@ export class ProduitImmobilierDetailsComponent implements OnInit, AfterViewInit 
     }
     if (annonce.produitImmobilierDTO.orientation === 'SE') {
         result = 'Sud Est';
-    }
-    return result;
+    }*/
+    return 'Sud Est';
   }
 
   ngAfterViewInit() {
-    this.displayMap();
   }
 
   displayMap() {
     this.computeTheMapBoxHeight();
     this.codeAddress(this.annonce);
+  }
+
+  createComponent() {
+    this.entry1.clear();
+    this.entry2.clear();
+    this.entry3.clear();
+    const array = Array.from(this.mapSimulation.keys());
+    const factory1 = this.resolver.resolveComponentFactory(this.getComponentType(array[0] + ''));
+    this.componentRef1 = this.entry1.createComponent(factory1);
+    this.fillComponent(array[0] + '', this.componentRef1.instance);
+
+    const factory2 = this.resolver.resolveComponentFactory(this.getComponentType(array[1] + ''));
+    this.componentRef2 = this.entry2.createComponent(factory2);
+    this.fillComponent(array[1] + '', this.componentRef2.instance);
+
+    const factory3 = this.resolver.resolveComponentFactory(this.getComponentType(array[2] + ''));
+    this.componentRef3 = this.entry3.createComponent(factory3);
+    this.fillComponent(array[2] + '', this.componentRef3.instance);
+  }
+
+  getComponentType(type: string): any {
+    if (type === 'PINEL6') {
+      return PinelComponent;
+    }
+    if (type === 'PINEL9') {
+      return Pinel9Component;
+    }
+    if (type === 'PINEL12') {
+      return Pinel12Component;
+    }
+  }
+
+
+  fillComponent(type: string, componentRef: any) {
+    if (type === 'PINEL6') {
+      this.fillComponentPinel(componentRef , this.dossier.resultatLoiPinel6DTO);
+    }
+    if (type === 'PINEL9') {
+      this.fillComponentPinel(componentRef , this.dossier.resultatLoiPinel9DTO);
+    }
+    if (type === 'PINEL12') {
+      this.fillComponentPinel(componentRef , this.dossier.resultatLoiPinel12DTO);
+    }
+  }
+
+  fillComponentPinel(componentRef: any, resultatLoiPinelDTO: ResultatLoiPinelDTO) {
+      componentRef.economyImpots = resultatLoiPinelDTO.economyImpots;
+      componentRef.effortEpargne = resultatLoiPinelDTO.effortEpargne;
+      componentRef.fraisAnnexe = resultatLoiPinelDTO.fraisAnnexe;
+      componentRef.loyerMaximum = resultatLoiPinelDTO.loyerMaximum;
+      componentRef.mensualiteCredit = resultatLoiPinelDTO.mensualiteCredit;
+      componentRef.montantEmprunt = resultatLoiPinelDTO.montantEmprunt;
+      componentRef.reductionImpots = resultatLoiPinelDTO.reductionImpots;
+  }
+
+
+  destroyComponent() {
+   this.componentRef1.destroy();
   }
 
   computeTheMapBoxHeight() {
@@ -265,9 +301,12 @@ export class ProduitImmobilierDetailsComponent implements OnInit, AfterViewInit 
     const target = $(event.target);
     if (target.attr('id').includes('1')) {
       this.tabNumber = 1;
-    }
+      setTimeout(() => { this.displayMap(); }, 1000);
+      }
     if (target.attr('id').includes('2')) {
       this.tabNumber = 2;
+      this.changeDetector.detectChanges();
+      this.createComponent();
     }
     if (target.attr('id').includes('3')) {
       this.tabNumber = 3;
@@ -279,44 +318,5 @@ export class ProduitImmobilierDetailsComponent implements OnInit, AfterViewInit 
       this.tabNumber = 5;
     }
     target.toggleClass('expanded');
-    setTimeout(() => { this.displayMap(); }, 1000);
-  }
-
-  openDialog(prestation: string) {
-    const self = this;
-    const browserWidth = document.body.offsetWidth;
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = false;
-    dialogConfig.width = '450px';
-    const left = (browserWidth - 450) / 2.;
-    dialogConfig.position = {
-      top: '70px',
-      left: (left + 'px')
-    };
-
-    const dialogRef = this.dialog.open(SearchComponent, dialogConfig);
-    dialogRef.componentInstance.prestation = prestation;
-    dialogRef.afterClosed().subscribe( data => {this.search = data; self.gotToListProduitImmobilierViewAndPassData(); });
-  }
-
-  openUserDialog() {
-    const browserWidth = document.body.offsetWidth;
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = false;
-    dialogConfig.width = '470px';
-    const left = (browserWidth - 470) / 2.;
-    dialogConfig.position = {
-      top: '70px',
-      left: (left + 'px')
-    };
-
-    const dialogRef = this.dialog.open(UserDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe( () => {});
-  }
-
-  gotToListProduitImmobilierViewAndPassData() {
-    this.router.navigate(['/listproduitimmobilier']).then(() => {this.commonService.changeMessage(this.search); });
   }
 }

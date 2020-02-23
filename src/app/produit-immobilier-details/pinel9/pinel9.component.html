@@ -1,0 +1,39 @@
+
+<div style="cursor:pointer;" class="flex-rectangle" (click)="realEstateFileFlag=!realEstateFileFlag">
+  <div>
+    <span class="tabulation">Pinel 9 ans </span>
+    <span style="float: right">{{effortEpargne | currency:'EUR':'symbol':'1.0-0':'fr'}}&#47;month</span>
+  </div>
+  <div class="tabulation1" *ngIf="realEstateFileFlag">
+    <br>
+    <div>
+      <span>Mensualité crédit</span>
+      <span style="float: right">{{mensualiteCredit | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+    <br>
+    <div>
+      <span>Réduction d'imports</span>
+      <span style="float: right">{{reductionImpots | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+    <br>
+    <div>
+      <span>Frais Annexe</span>
+      <span style="float: right">{{fraisAnnexe | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+    <br>
+    <div>
+      <span>Le Loyer Max</span>
+      <span style="float: right">{{loyerMaximum | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+    <br>
+    <div>
+      <span>Economy d'impots</span>
+      <span style="float: right">{{economyImpots | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+    <br>
+    <div>
+      <span>Effort d'epargne</span>
+      <span style="float: right">{{effortEpargne | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
+    </div>
+  </div>
+</div>

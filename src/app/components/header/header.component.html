@@ -1,0 +1,13 @@
+<mat-toolbar class="menu-bar mat-elevation-z1">
+  <div class="colorOpacity3">BETTER</div>
+  <div style="width:100%;" class="md-toolbar-tools" >
+     <button class="colorOpacity4 button1" (click)="openDialog('A');" type="button">Achetter</button> 
+     <button class="colorOpacity4 button1" (click)="openDialog('L');" type="button">Louer</button>
+	 <button class="colorOpacity4 button1" type="button">A propos de nous</button> 
+	 <button class="colorOpacity4 button1" (click)="createProduitImmobilierDialog();" type="button">Déposer une annonce</button>
+  </div>
+  <div style="float: right">
+    <img src="./../assets/image/favorite-24px.svg" style="opacity: 0.5" width="20px" height="18.35px" alt="heart"/>
+    <button class="colorOpacity5 button2" (click)="openUserDialog();" type="button">SIGN IN</button>
+  </div>
+</mat-toolbar>

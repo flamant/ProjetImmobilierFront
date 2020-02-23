@@ -1,0 +1,428 @@
+<div class="row1 colorOpacity10">
+	<div class="vertical-horizontal-align">
+		<span id="searchBuy" class="selected">Déposer une annonce</span> 
+	</div>
+</div>
+	<div class="row2 colorOpacity7">
+		<mat-radio-group style="width: 50% !important;" class="row colorOpacity7" name="aim" [(ngModel)]="aim" (ngModelChange)="aimChanged($event)">
+			<mat-radio-button class="matRadio" labelPosition="after" checked="true" value="V">A vendre</mat-radio-button>
+			<mat-radio-button labelPosition="after" value="L">A louer</mat-radio-button>
+		</mat-radio-group>
+	</div>
+
+
+<mat-dialog-content class="colorOpacity7 multisteps-form__form" [formGroup]="dialogFormGroup">
+<div *ngIf="panel==='obligatoire'"> 
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div class="column">
+					<mat-form-field>
+						<mat-select placeholder="Type" formControlName="type" #mySelect>
+							<!-- <mat-option value="" selected>Choisir le type d'habitation</mat-option> -->
+							<mat-option value="Maison">Maison</mat-option>
+							<mat-option value="Appartement">Appartement</mat-option>
+							<mat-option value="Autre">Autre</mat-option>
+						</mat-select>	
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('type').hasError('required') && dialogFormGroup.controls['type']?.touched">Le type d'habitation</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('type').hasError('required') && dialogFormGroup.controls['type']?.touched">est obligatoire.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="text" placeholder="Telephone" formControlName="telephone">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('telephone').hasError('required') && dialogFormGroup.controls['telephone']?.touched">La téléphone est obligatoire.</mat-error>
+				</div>
+			</div>		
+	</div>
+	<br>
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface Habitable" formControlName="surfaceHabitable">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('surfaceHabitable').hasError('required') && dialogFormGroup.controls['surfaceHabitable']?.touched">La surface Habitable</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('surfaceHabitable').hasError('required') && dialogFormGroup.controls['surfaceHabitable']?.touched">est obligatoire.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface Loi Quarez" formControlName="surfaceLoiQuarez">
+					</mat-form-field>						
+					<mat-error *ngIf="dialogFormGroup.get('surfaceLoiQuarez').hasError('required') && dialogFormGroup.controls['surfaceLoiQuarez']?.touched">La surface Loi Quarez</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('surfaceLoiQuarez').hasError('required') && dialogFormGroup.controls['surfaceLoiQuarez']?.touched">est obligatoire.</mat-error>
+				</div>
+			</div>		
+	</div>	
+	<br>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nbr de pièce" formControlName="nbrPiece">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('nbrPiece').hasError('required') && dialogFormGroup.controls['nbrPiece']?.touched">Le nombre de pièces est</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('nbrPiece').hasError('required') && dialogFormGroup.controls['nbrPiece']?.touched">obligatoire.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nbr de chambre" formControlName="nbrChambre">
+					</mat-form-field>						
+					<mat-error *ngIf="dialogFormGroup.get('nbrChambre').hasError('required') && dialogFormGroup.controls['nbrChambre']?.touched">Le nombre de chambre est</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('nbrChambre').hasError('required') && dialogFormGroup.controls['nbrChambre']?.touched">obligatoire.</mat-error>
+				</div>
+			</div>		
+	</div>
+	<br>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nbr de salle de bain" formControlName="nbrSalleDeBain">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('nbrSalleDeBain').hasError('required') && dialogFormGroup.controls['nbrSalleDeBain']?.touched">Le nombre de salle de</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('nbrSalleDeBain').hasError('required') && dialogFormGroup.controls['nbrSalleDeBain']?.touched">bain est obligatoire.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nbr de salle de douche" formControlName="nbrSalleDeDouche">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('nbrSalleDeDouche').hasError('required') && dialogFormGroup.controls['nbrSalleDeDouche']?.touched">Le nombre de salle de</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('nbrSalleDeDouche').hasError('required') && dialogFormGroup.controls['nbrSalleDeDouche']?.touched">douche est obligatoire.</mat-error>
+				</div>
+			</div>		
+	</div>	
+	<br >
+	<div  class="marginTop-10px flex1">
+		
+		<div *ngIf="dialogFormGroup.get('type').value === 'Maison' || dialogFormGroup.get('type').value === 'Appartement'" class="vertical-horizontal-align marginTop10px">
+			<div *ngIf="dialogFormGroup.get('type').value === 'Appartement'" class="column">
+				<input  type="number" placeholder="Etage" formControlName="etage">
+				<mat-error *ngIf="dialogFormGroup.get('etage').hasError('required') && dialogFormGroup.controls['etage']?.touched">L'étage est obligatoire'</mat-error>
+			</div>
+			<div *ngIf="dialogFormGroup.get('type').value === 'Maison'" class="column">
+				<input  type="number" placeholder="Nbr d'étages" formControlName="nbrEtage">
+				<mat-error *ngIf="dialogFormGroup.get('nbrEtage').hasError('required') && dialogFormGroup.controls['nbrEtage']?.touched">Le nombre d'étages</mat-error>
+				<mat-error *ngIf="dialogFormGroup.get('nbrEtage').hasError('required') && dialogFormGroup.controls['nbrEtage']?.touched">est obligatoire</mat-error>
+			</div>			
+		</div>
+		<div style="padding-left:10px" class="marginTop10px applyCenterElement">
+			<div class="column">	
+				<mat-form-field>
+					<mat-select   placeholder="Orientation" formControlName="orientation">
+						<!-- <mat-option value="" selected>Choisir l'orientation</mat-option> -->
+						<mat-option value="N">Nord</mat-option>
+						<mat-option value="O">Ouest</mat-option>
+						<mat-option value="E">Est</mat-option>
+						<mat-option value="S">Sud</mat-option>
+						<mat-option value="NO">Nord Ouest</mat-option>
+						<mat-option value="NE">Nord Est</mat-option>
+						<mat-option value="SO">Sud Ouest</mat-option>
+						<mat-option value="SE">Sud Est</mat-option>
+					</mat-select>	
+				</mat-form-field>
+				<mat-error *ngIf="dialogFormGroup.get('orientation').hasError('required') && dialogFormGroup.controls['orientation']?.touched">L'orientation est obligatoire.</mat-error>
+			</div>
+		</div>		
+	</div>
+	<div class="marginTop-10px flex1">
+		<div *ngIf="aim==='V'" class="vertical-horizontal-align marginTop10px">
+			<div class="column">
+				<mat-form-field>
+					<input matInput type="number" placeholder="Prix" formControlName="prix">
+				</mat-form-field>
+				<mat-error *ngIf="dialogFormGroup.get('prix').hasError('required') && dialogFormGroup.controls['prix']?.touched">Le prix est obligatoire.</mat-error>
+			</div>
+		</div>
+		<div *ngIf="aim==='V'" class="vertical-horizontal-align marginTop10px" >
+			<div class="column">	
+				<mat-form-field>
+					<input matInput type="number" placeholder="Loyer maximum demandé" formControlName="loyerMaximum">
+				</mat-form-field>					
+				<mat-error *ngIf="dialogFormGroup.get('loyerMaximum').hasError('required') && dialogFormGroup.controls['loyerMaximum']?.touched">Le loyer maximum demandé</mat-error>
+				<mat-error *ngIf="dialogFormGroup.get('loyerMaximum').hasError('required') && dialogFormGroup.controls['loyerMaximum']?.touched">est obligatoire.</mat-error>
+			</div>				
+		</div>
+		<div *ngIf="aim==='V'" class="nospace">
+			<img id="help1" src="./../assets/image/help.png" alt="Help" title="Si vous vendez ce bien immobilier, donnez un prix et le loyer maximum que sa location peut rapporter.">	
+		</div>	
+		<div *ngIf="aim==='L'" class="vertical-horizontal-align marginTop10px" >
+			<div class="column">	
+				<mat-form-field>
+					<input matInput type="number" placeholder="Loyer" formControlName="loyerMaximum">
+				</mat-form-field>					
+				<mat-error *ngIf="dialogFormGroup.get('loyerMaximum').hasError('required') && dialogFormGroup.controls['loyerMaximum']?.touched">Le loyer est obligatoire.</mat-error>
+			</div>				
+		</div>
+		<div *ngIf="aim==='L'" style="visibility: hidden" class="vertical-horizontal-align marginTop10px" >
+			<div class="column">	
+				<mat-form-field>
+					<input matInput type="number">
+				</mat-form-field>					
+			</div>				
+		</div>						
+	</div>		
+	<div class="column">
+		<mat-form-field>
+			<input matInput type="text" placeholder="Adresse" formControlName="adresse">
+		</mat-form-field>
+		<mat-error *ngIf="dialogFormGroup.get('adresse').hasError('required') && dialogFormGroup.controls['adresse']?.touched">L'adresse est obligatoire.</mat-error>
+	</div>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="text" placeholder="Code postal" formControlName="codePostal">
+					</mat-form-field>
+					<mat-error *ngIf="dialogFormGroup.get('codePostal').hasError('required') && dialogFormGroup.controls['codePostal']?.touched">Le code postal est obligatoire.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="text" placeholder="Ville" formControlName="ville">
+					</mat-form-field>					
+					<mat-error *ngIf="dialogFormGroup.get('ville').hasError('required') && dialogFormGroup.controls['ville']?.touched">La ville est obligatoire.</mat-error>
+				</div>
+			</div>		
+	</div>
+	<br>
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Charges copropriétaires" formControlName="chargesCoprop">
+					</mat-form-field>
+					<mat-error *ngIf="dialogFormGroup.get('chargesCoprop').hasError('required') && dialogFormGroup.controls['chargesCoprop']?.touched">Les charges copropriétaires</mat-error>
+					<mat-error *ngIf="dialogFormGroup.get('chargesCoprop').hasError('required') && dialogFormGroup.controls['chargesCoprop']?.touched">sont obligatoires.</mat-error>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field class="date">
+						<input matInput [disabled]= "true" [readonly]= "true" [matDatepicker]="datepicker2" placeholder="Date de mise en ligne" formControlName="dateMiseEnLigne">
+						<mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+						<mat-datepicker #datepicker2></mat-datepicker>
+					</mat-form-field>
+				</div>
+			</div>		
+	</div>	
+	
+<!--************************   Files upload start *********************/-->	
+<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+  <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+</div>
+<div  class="files-list" *ngFor="let file of files;let i= index">
+    <p> {{ file }} </p>
+    <button class="delete-file" (click)="deleteAttachment(i)">
+      <img src="../../assets/image/Recycle_Bin_Full.png">
+    </button>
+</div>
+<!--/************************   Files upload end *********************/-->
+</div>	
+
+<div *ngIf="panel==='optionel'">		
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nombre de toilette séparée" formControlName="nbrToiletteSepare">
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nombre de toilette non séparée" formControlName="nbrToiletteNonSepare">
+					</mat-form-field>					
+				</div>
+			</div>		
+	</div>	
+	
+	<div class="marginTop-10px flex1">
+		<div class="vertical-horizontal-align marginTop10px">
+			<div class="column">
+				<mat-form-field>
+					<mat-select  matInput placeholder="Dpe" formControlName="dpe">
+						<mat-option value="" selected></mat-option>
+						<mat-option value="A">A</mat-option>
+						<mat-option value="B">B</mat-option>
+						<mat-option value="C">C</mat-option>
+						<mat-option value="D">D</mat-option>
+						<mat-option value="E">E</mat-option>
+						<mat-option value="F">F</mat-option>
+						<mat-option value="G">G</mat-option>
+					</mat-select>	
+				</mat-form-field>				
+				<mat-error *ngIf="dialogFormGroup.get('dpe').hasError('required') && dialogFormGroup.controls['dpe']?.touched">Le dpe est obligatoire.</mat-error>
+			</div>
+		</div>
+		<div class="vertical-horizontal-align marginTop10px">
+			<div class="column">
+				<mat-form-field>
+					<mat-select  matInput placeholder="Zone" formControlName="zone">
+						<mat-option value="" selected></mat-option>
+						<mat-option value="A">A</mat-option>
+						<mat-option value="Bbis">Abis</mat-option>
+						<mat-option value="B1">B1</mat-option>
+						<mat-option value="B2">B2</mat-option>
+						<mat-option value="C">C</mat-option>
+					</mat-select>	
+				</mat-form-field>				
+				<mat-error *ngIf="dialogFormGroup.get('zone').hasError('required') && dialogFormGroup.controls['zone']?.touched">La zone est obligatoire.</mat-error>
+			</div>
+		</div>				
+	</div>
+
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isParking">Parking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isBox">Box&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isCave">Cave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isBalcon">Balcon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isTerasse">Terasse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isLoggia">Loggia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isSurfaceAnnexe">Surface annexe</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isDuplex">Duplex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" style="margin-left:10px">
+				<mat-checkbox formControlName="isTriplex">Triplex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<mat-checkbox formControlName="isLift">Assenceur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>			
+			<div class="vertical-horizontal-align marginTop10px" style="margin-left:10px">
+				<mat-checkbox formControlName="isGardien">Gardien&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" style="margin-left:10px">
+				<mat-checkbox formControlName="isCheminee">Cheminée&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" style="margin-left:10px">
+				<mat-checkbox formControlName="isInterphone">Interphone&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" style="margin-left:10px">
+				<mat-checkbox formControlName="isDigicode">Digicode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-checkbox>	
+			</div>			
+	</div>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface balcon" formControlName="surfaceBalcon">
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface terasse" formControlName="surfaceTerrasse">
+					</mat-form-field>					
+				</div>
+			</div>		
+	</div>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface cave" formControlName="surfaceCave">
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface loggia" formControlName="surfaceLoggia">
+					</mat-form-field>					
+				</div>
+			</div>		
+	</div>	
+	<div class="marginTop-10px flex1">
+			<div style="padding-left:10px" class=" marginTop10px applyCenterElement">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Surface annexe" formControlName="autreSurfaceAnnexe">
+					</mat-form-field>
+				</div>
+			</div>
+	</div>		
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Taxes fonciaires" formControlName="taxeFonciaire">
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field class="date">
+						<input matInput [matDatepicker]="datepicker3" placeholder="Date de construction" formControlName="dateConstruction">
+						<mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
+						<mat-datepicker #datepicker3></mat-datepicker>
+					</mat-form-field>
+				</div>
+			</div>		
+	</div>	
+	<div class="marginTop-10px flex1">
+			<div class="vertical-horizontal-align marginTop10px">
+				<div  class="column">
+					<mat-form-field>
+						<input matInput type="number" placeholder="Nombre de lots" formControlName="nbrLots">
+					</mat-form-field>
+				</div>
+			</div>
+			<div *ngIf="dialogFormGroup.get('type').value === 'Appartement'" class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input  matInput type="number" placeholder="Nbr d'étages" formControlName="nbrEtage">
+					</mat-form-field>					
+				</div>
+			</div>	
+			<div *ngIf="dialogFormGroup.get('type').value !== 'Appartement'" style="visibility:hidden" class="vertical-horizontal-align marginTop10px" >
+				<div class="column">	
+					<mat-form-field>
+						<input  matInput type="number" >
+					</mat-form-field>					
+				</div>
+			</div>				
+	</div>		
+	<div class="column">
+		<mat-form-field floatLabel="always">
+			<textarea matInput type="text" placeholder="Description" formControlName="description"></textarea>
+		</mat-form-field>
+	</div>
+</div>
+<br>	
+<div class="row vertical-horizontal-align">
+	<a *ngIf="panel==='optionel'" href="javascript:" (click)="panel='obligatoire'">Afficher les informations obligatoires</a>
+	<a *ngIf="panel==='obligatoire'" href="javascript:" (click)="panel='optionel'">Afficher les informations pour plus de chance {{aim ==='L' ? 'de louer' : 'de vendre'}}</a>
+</div>
+<br>
+	<mat-dialog-actions class="row">
+		<button class="mat-raised-button"(click)="close()">Close</button>
+		<button type="submit" class="mat-raised-button custom-button" [disabled]="!dialogFormGroup.valid || files.length < 3" (click)="save();">Search</button>
+	</mat-dialog-actions>	
+</mat-dialog-content>
+

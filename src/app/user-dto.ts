@@ -27,7 +27,8 @@ export class UserDTO {
             json['creditAmount'],
             json['monthlyPayment'],
             json['creditTerminationDate'], // new Date(json['creditTerminationDate'])
-            json['SIRETNumber']
+            json['SIRETNumber'],
+            json['message']
         );
     }
     constructor(
@@ -56,7 +57,8 @@ export class UserDTO {
         public creditAmount: number,
         public monthlyPayment: number,
         public creditTerminationDate: number, // Date
-        public SIRETNumber: string
+        public SIRETNumber: string,
+        public message: string
     ) {  }
 
 }

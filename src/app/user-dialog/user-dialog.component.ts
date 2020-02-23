@@ -55,11 +55,11 @@ export class UserDialogComponent implements OnInit {
   save() {
     if (this.login) {
       // tslint:disable-next-line: max-line-length
-      const userDTO = new UserDTO(0, '', '', '', this.dialogFormGroup.get('email').value , this.dialogFormGroup.get('password').value, '', '', '', '', '', '', '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, '');
+      const userDTO = new UserDTO(0, '', '', '', this.dialogFormGroup.get('email').value , this.dialogFormGroup.get('password').value, '', '', '', '', '', '', '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, '', '');
       this.service.login(userDTO);
     } else {
       // tslint:disable-next-line: max-line-length
-      const userDTO = new UserDTO(0, this.dialogFormGroup.get('gender').value, this.dialogFormGroup.get('lastName').value, this.dialogFormGroup.get('firstName').value, this.dialogFormGroup.get('email').value, this.dialogFormGroup.get('password').value, this.dialogFormGroup.get('confirmPassword').value, '', '', '', '', '', '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, '');
+      const userDTO = new UserDTO(0, this.dialogFormGroup.get('gender').value, this.dialogFormGroup.get('lastName').value, this.dialogFormGroup.get('firstName').value, this.dialogFormGroup.get('email').value, this.dialogFormGroup.get('password').value, this.dialogFormGroup.get('confirmPassword').value, '', '', '', '', '', '', '', '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, '', '');
       this.service.createUser(userDTO);
     }
     this.dialogRef.close(true);

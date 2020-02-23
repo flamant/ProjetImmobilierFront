@@ -1,15 +1,3 @@
-<mat-toolbar class="menu-bar mat-elevation-z1">
-  <div class="colorOpacity3">BETTER</div>
-  <div style="width:100%;" class="md-toolbar-tools" >
-     <button class="colorOpacity4 button1" (click)="openDialog('A');" type="button">Buy</button> 
-     <button class="colorOpacity4 button1" (click)="openDialog('L');" type="button">Rent</button>
-     <button class="colorOpacity4 button1" type="button">About us</button> 
-  </div>
-  <div style="float: right">
-    <img src="./../assets/image/favorite-24px.svg" style="opacity: 0.5" width="20px" height="18.35px" alt="heart"/>
-    <button class="colorOpacity5 button2" (click)="openUserDialog();" type="button">SIGN IN</button>
-  </div>
-</mat-toolbar>
 <div fxLayout="row">
   <div fxFlex="15%"></div>
   <div fxFlex="70%">
@@ -54,8 +42,8 @@
 						<hr color="blue" width="100%">
 						<nav style="position:relative;" class="navigation">
 								<ul class="menu">
-										<li><a id="menuHorizon1" class="expanded" (click)="applyClickCss($event)" href="javascript:void(0)">Description</a></li>
-										<li><a id="menuHorizon2" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
+										<li><a id="menuHorizon1" (click)="applyClickCss($event)" href="javascript:void(0)">Description</a></li>
+										<li><a id="menuHorizon2" class="expanded" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
 										<li><a id="menuHorizon3" (click)="applyClickCss($event)" href="javascript:void(0)">Perspective for future</a></li>
 										<li><a id="menuHorizon4" (click)="applyClickCss($event)" href="javascript:void(0)">Neighborhood</a></li>
 										<li><a id="menuHorizon5" (click)="applyClickCss($event)" href="javascript:void(0)">Agency</a></li>
@@ -66,7 +54,7 @@
 								<div class="toggle-menu" title="Menu"><img alt="Menu" title="Menu" src="./../assets/image/menu-28px-25px.png"  style="vertical-align:middle; padding-right:3px"/>MENU</div>
 								<ul class="menu">
 										<li><a id="menuVertical1" (click)="applyClickCss($event)" href="javascript:void(0)">Description</a></li>
-										<li><a id="menuVertical2" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
+										<li><a id="menuVertical2" class="expanded" (click)="applyClickCss($event)" href="javascript:void(0)">Mensualite</a></li>
 										<li><a id="menuVertical3" (click)="applyClickCss($event)" href="javascript:void(0)">Perspective for future</a></li>
 										<li><a id="menuVertical4" (click)="applyClickCss($event)" href="javascript:void(0)">Neighborhood</a></li>
 										<li><a id="menuVertical5" (click)="applyClickCss($event)" href="javascript:void(0)">Agency</a></li>
@@ -158,7 +146,7 @@
 									<br>
 								</div>
 								<div fxFlex="40%">
-									<div id="mapBox" class="mapBox"  style="width:100%">
+									<div id="mapBox" class="mapBox"  style="width:100%"> <!--style="width:100%"-->
 										<div #map id="map" style="width:100%;height:100%;"></div>
 									</div>
 								</div>
@@ -171,43 +159,10 @@
 								<p>{{annonce?.description}}</p>
 							</div>	
 							
-							<br>						
-							<div *ngFor="let item of realEstateFile; let i = index" style="cursor:pointer;" class="flex-rectangle" (click)="realEstateFileFlag[i]=!realEstateFileFlag[i]">
-								<div>
-									<span>{{i+1}}.</span><span class="tabulation">{{item.type}} </span> <span *ngIf="item.years!=0">{{item.years}} years</span>
-									<span style="float: right">{{item?.price | currency:'EUR':'symbol':'1.0-0':'fr'}}&#47;month</span>
-								</div>
-								<div class="tabulation1" *ngIf="realEstateFileFlag[i]">
-									<br>
-									<p style="display: inline;">{{item.text}}</p><span class="colorOpacity2">learn more</span>
-									<br>
-									<br>
-									<div>
-										<span>Monthly tax reduction</span>
-										<span style="float: right">{{item?.monthlyTaxReduction | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
-									</div>
-									<br>
-									<div>
-										<span>Réduction d'imports</span>
-										<span style="float: right">{{item?.reductionImports | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
-									</div>
-									<br>	
-									<div>
-										<span>Maximum monthly rent price</span>
-										<span style="float: right">{{item?.reductionImports | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
-									</div>
-									<br>
-									<div>
-										<span>Estimated monthly credit rate</span>
-										<span style="float: right">{{item?.estimatedMonthlyCreditRate | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
-									</div>
-									<br>
-									<div>
-										<span>Additional monthly costs</span>
-										<span style="float: right">{{item?.additionalMonthlyCosts | currency:'EUR':'symbol':'1.0-0':'fr'}}</span>
-									</div>																																			
-								</div>
-							</div>
+							<br>
+                <template #option1></template>
+                <template #option2></template>
+                <template #option3></template>													
 						</div>
 						<br>
 						<nav fxLayout fxLayoutAlign="center center">
